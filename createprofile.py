@@ -18,13 +18,13 @@ if check == False:
     try:
         makedirs(directory, exist_ok = True)
         print("New user {} has been created successfully".format(user_name_copy))
-        print("\nPlease Note down your private key {}".format(key.decode()))
+        print("\nPlease Note down your private key within 30 Seconds!!!  {}".format(key.decode()))
         createcheck(new_user, key, directory)
         sleep(30)
     except OSError as error:
         print("Operation failed due to some unexpected error!!!")
         sleep(10)
 else:
-    print("Sorry {} this user already exist!!".format(user_name_copy))
+    print("Sorry {} user already exist!!".format(user_name_copy))
     sleep(10)
 

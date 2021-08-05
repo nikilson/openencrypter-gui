@@ -1,4 +1,3 @@
-
 def datawriter(user, user_key, dir):
     title = str(input("Enter the title : "))
     message = str(input("Enter the mesaage : "))
@@ -11,7 +10,7 @@ def datawriter(user, user_key, dir):
             message_file = open(dir, "wb")
             message_file.write(enc_msg)
             message_file.close()
-        print("message has been written successfully!!!")
+        print("Message has been written successfully!!!")
     except:
-       print("please try again!!!")
+       print("Please try again!!!")
 
