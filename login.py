@@ -53,7 +53,7 @@ def main_login():
     while status == True:
         main()
     while log_status:
-        print("press 1 for WRITE new data\npress 2 for READ old data\npress 3 for QUIT")
+        print("press 1 for WRITE new data\npress 2 for READ old data\npress 3 for REMOVE old data\npress 4 for QUIT")
         select = str(input("Your option : "))
         if select == '1':
             import writedata
@@ -62,6 +62,9 @@ def main_login():
             import readdata
             readdata.Reader(new_user, user_key, directory)
         elif select == '3':
+            import deletedata
+            deletedata.text_deleter(new_user, user_key, directory)
+        elif select == '4':
             break
         else:
             print("Retry!!!")

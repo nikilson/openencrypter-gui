@@ -1,6 +1,9 @@
 def datawriter(user, user_key, dir):
+    from clearscreen import clean_shell
+    clean_shell()
     title = str(input("Enter the title : "))
     message = str(input("Enter the mesaage : "))
+    clean_shell()
     try:
         enc_msg = user.encrypt(message.encode('utf-8'))
         if title != "validator":

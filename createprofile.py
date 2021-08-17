@@ -1,6 +1,9 @@
 from cryptography.fernet import Fernet
 from os import getcwd, path, makedirs
 from time import sleep
+from pyperclip import copy as clipcopier
+from threading import Thread
+from clearscreen import clear_clipboard
 key = Fernet.generate_key()
 new_user = Fernet(key)
 user_name = str(input("Please Enter the User Name : "))
@@ -19,8 +22,12 @@ if check == False:
         makedirs(directory, exist_ok = True)
         print("New user {} has been created successfully".format(user_name_copy))
         print("\nPlease Note down your private key within 30 Seconds!!!  {}".format(key.decode()))
+        print("\nYour key is copied into the clipboard use it within 75 Seconds!!!")
+        clipcopier(key.decode())
         createcheck(new_user, key, directory)
         sleep(30)
+        clipclear_thread = Thread(target=clear_clipboard)
+        clipclear_thread.start()
     except OSError as error:
         print("Operation failed due to some unexpected error!!!")
         sleep(10)

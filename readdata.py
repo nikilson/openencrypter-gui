@@ -1,13 +1,18 @@
 from os import listdir, path
+from clearscreen import clean_shell, clear_clipboard
+from pyperclip import copy as clipcopier
+from threading import Thread
 #path = "E:\\Productivity\\Documents\\sdrowssap\\Rinaldo"
 def Reader(user, key, dir):
+    clean_shell()
     print("exit - To go mainmenu")
     message_list = []
-    for no, files in enumerate(listdir(dir)):
-        if files.endswith(".txt"):
-            message_list.append(files)
-            # Prints only text file present in My Folder
-            print(files[:-4], " >> " ,no)
+    for file_det in listdir(dir):
+        if file_det.endswith(".txt") and (file_det != "validator.txt"):
+            message_list.append(file_det)
+    for no, files in enumerate(message_list):      
+        # Prints only text file present in My Folder
+        print(files[:-4], " >> " ,no)
     selection = input("Please enter your selection : ")
     try:
         selection = int(selection)
@@ -20,6 +25,13 @@ def Reader(user, key, dir):
         read_file.close()
         decoded = user.decrypt(read_token)
         decoded = decoded.decode()
-        print(decoded)
+        clip_ask = input("Do you want to copy this to clipboard Default - No (Y or n) : ")
+        if clip_ask.lower() == "y":
+            clipcopier(decoded)
+            clipclear_thread = Thread(target=clear_clipboard)
+            clipclear_thread.start()
+            print("The text is copied into the clipboard use it within 45 Seconds !!!")
+        else:
+            print(decoded)
     except:
         pass
