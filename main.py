@@ -1,7 +1,7 @@
 def main_menu():
     global inv, select_mode
     inv = False
-    print("Enter 1 >> Login \nEnter 2 >> Register new profile \nEnter 3 >> Quit")
+    print("Enter 1 >> Login \nEnter 2 >> Register new profile \nEnter 3 >> Live encryption\nEnter 4 >> Quit")
     select_mode = input("Please enter your selection : ")
     try:
         select_mode = int(select_mode)
@@ -17,6 +17,9 @@ def main_menu():
             pass
         import createprofile
     elif select_mode == 3:
+        from liveenc import live_main
+        live_main()
+    elif select_mode == 4:
         quit()
     else:
         inv = True
