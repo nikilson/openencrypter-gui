@@ -11,11 +11,12 @@ def main_menu():
         import login
         login.main_login()
     elif select_mode == 2:
-        try:
-            del createprofile
-        except:
-            pass
+        # try:
+        #     del createprofile
+        # except:
+        #     pass
         import createprofile
+        createprofile.Create_Profifle()
     elif select_mode == 3:
         from liveenc import live_main
         live_main()

@@ -4,7 +4,7 @@ from clearscreen import clean_shell
 from pyperclip import copy as clipcopier
 from threading import Thread
 from clearscreen import clear_clipboard
-
+from getpass import getpass
 user_name = ""
 user_key = ""
 def login_live(new_user):
@@ -68,7 +68,7 @@ def live_main():
     def main():
         global status
         clean_shell()
-        print("press 1 for GENERATE KEY\npress 2 for LOGIN\npress 3 for MAINMENU")
+        print("press 1 >> GENERATE KEY\npress 2 >> LOGIN\npress 3 >> MAINMENU")
         ask_mode = input("\nPlease enter your selection : ")
         try:
             ask_mode = int(ask_mode)
@@ -80,19 +80,21 @@ def live_main():
             clean_shell()
             key_input = input("Please enter your secret key : ")
             try:
-                new_user = Fernet(key_input) 
+                new_user = Fernet(key_input)
+                while True:
+                    log_sts = login_live(new_user)
+                    if log_sts == False:
+                        break
+                    else:
+                        pass
             except:
+                sleep(4)
                 print("Sorry, Try again!!!")
-            while True:
-                log_sts = login_live(new_user)
-                if log_sts == False:
-                    break
-                else:
-                    pass
         elif ask_mode == 3:
             status = False
         else:
             print("Invalid selection!!!")
+            sleep(3)
     status = True
     while status == True:
         if status == False:
