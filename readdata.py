@@ -7,19 +7,19 @@ from threading import Thread
 def Reader(password, directory):
     clean_shell()
     print("Press 1 >> Passwords\nPress 2 >> Plain Text\nPress 3 >> Quit")
-    select_pass_text = input("\nEnter your selection, Defualt(Plain Text) : ")
+    select_pass_text = input("\nEnter your selection, Defualt(Passwords) : ")
     try:
         select_pass_text = int(select_pass_text)
     except:
         select_pass_text = 0
     private_key = path.join(directory, ".keys")
     private_key = private_key + "/private.key"
-    if select_pass_text == 1:
-        directory = path.join(directory, ".passwords")
+    if select_pass_text == 2:
+        directory = path.join(directory, ".text")
     elif select_pass_text == 3:
         directory = "exit"
     else:
-        directory = path.join(directory, ".text")
+        directory = path.join(directory, ".passwords")
     message_list = []
     if directory != "exit":
         for file_det in listdir(directory):
@@ -39,7 +39,7 @@ def Reader(password, directory):
                 print("Invalid selection")
         from decrypt import Decrypter
         decoded = Decrypter(message_list[selection][:-4], private_key, directory, password)
-        clip_ask = input("Do you want to copy this to clipboard Default - No (Y or n) : ")
+        clip_ask = input("Do you want to copy this to clipboard (Y or n) : ")
         if select_pass_text == 1:
             service_loc = decoded.find("|service ends the user is :")
             service_name = decoded[:service_loc]
@@ -58,7 +58,13 @@ def Reader(password, directory):
         else:
             state_text = "text"
             pass
-        if clip_ask.lower() == "y":
+        if clip_ask.lower() == "n":
+            if select_pass_text == 1:
+                print(decoded)
+                print(print_password)
+            else:
+                print(decoded)
+        else:
             if select_pass_text == 1:
                 print(decoded)
                 decoded = password_obtained
@@ -66,12 +72,6 @@ def Reader(password, directory):
             clipclear_thread = Thread(target=clear_clipboard)
             clipclear_thread.start()
             print(f"The {state_text} is copied into the clipboard use it within 45 Seconds !!!")
-        else:
-            if select_pass_text == 1:
-                print(decoded)
-                print(print_password)
-            else:
-                print(decoded)
         print("\nThe screen will be cleared within 30 Seconds!!!")
         sleep(30)
         clean_shell()

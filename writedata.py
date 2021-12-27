@@ -1,8 +1,8 @@
 def password_collect_service():
     from getpass import getpass
     while True:
-        password_1 = getpass("\nPlease Enter your Password : ")
-        password_2 = getpass("\nPlease Enter your Password Again: ")
+        password_1 = input("\nPlease Enter your Password : ")
+        password_2 = input("\nPlease Enter your Password Again: ")
         if password_1 == password_2:
             break
         else:
