@@ -1,22 +1,21 @@
 #from cryptography.fernet import Fernet
-from decrypt import Decrypter
-from os import getcwd, path
-from time import sleep
-from clearscreen import clean_shell
-from getpass import getpass
-user_name = ""
-user_key = ""
-new_user = ""
-directory = getcwd()
-
 def main_login():
-    global user_name, user_key, new_user, directory
-    global status, log_status, key_directory, key_got, token_key
+    from decrypt import Decrypter
+    from os import getcwd, path
+    from time import sleep
+    # from clearscreen import clean_shell
+    from getpass import getpass
+    user_name = ""
+    user_key = ""
+    new_user = ""
+    directory = getcwd()
+    #global user_name, user_key, new_user, directory
+    #global status, log_status, key_directory, key_got, token_key
     #global user_name, user_key, new_user, directory
     def main():
         global user_name, user_key, new_user, directory, status
         global log_status, key_directory, key_got, token_key
-        clean_shell()
+        # clean_shell()
         print("exit << Go back to main")
         user_name = str(input("User Name : "))
         if user_name == "exit":
@@ -54,13 +53,13 @@ def main_login():
                 key_got = 0
                 token_key = None
         if key_got == token_key:
-            clean_shell()
+            # clean_shell()
             print("Login Successfull!!!")
             log_status = True
             status = False
         else:
             sleep(4)
-            clean_shell()
+            # clean_shell()
             log_status = False
             directory = getcwd()
     #sleep(5)

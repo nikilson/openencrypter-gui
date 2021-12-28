@@ -1,36 +1,41 @@
 def main_menu():
-    global inv, select_mode
-    inv = False
-    print("Enter 1 >> Login \nEnter 2 >> Register new profile \nEnter 3 >> Live encryption\nEnter 4 >> Quit")
-    select_mode = input("Please enter your selection : ")
-    try:
-        select_mode = int(select_mode)
-    except:
-        select_mode = 0
-    if select_mode == 1:
-        import login
-        login.main_login()
-    elif select_mode == 2:
-        # try:
-        #     del createprofile
-        # except:
-        #     pass
-        import createprofile
-        createprofile.Create_Profifle()
-    elif select_mode == 3:
+    import tkinter
+    global open_encrypter_gui
+    open_encrypter_gui = tkinter.Tk()
+    open_encrypter_gui.geometry("700x450")
+    def Create_Profifle1():
+        global open_encrypter_gui
+        from createprofile import Create_Profifle
+        open_encrypter_gui.destroy()
+        Create_Profifle()
+    def main_login1():
+        global open_encrypter_gui
+        from login import main_login
+        open_encrypter_gui.destroy()
+        main_login()
+    def live_main1():
+        global open_encrypter_gui
         from liveenc import live_main
+        open_encrypter_gui.destroy()
         live_main()
-    elif select_mode == 4:
-        quit()
-    else:
-        inv = True
+    # def select_mode_method(x):
+    #     global select_mode, open_encrypter_gui
+    #     select_mode = x
+    #     print(select_mode)
+        # open_encrypter_gui.destroy()
+    welcome_open_encrypter = tkinter.Label(open_encrypter_gui, text="Welcome to Open Encrypter!!!\n", 
+        relief="flat", font=("Arial", 22))
+    home_b1 = tkinter.Button(open_encrypter_gui, width=30, padx=2, pady=2, font=("Arial", 18), text="Login", command=(lambda: main_login1()))
+    home_b2 = tkinter.Button(open_encrypter_gui, width=30, padx=2, pady=2, font=("Arial", 18), text="Register New Profile", command=(lambda: Create_Profifle1()))
+    home_b3 = tkinter.Button(open_encrypter_gui, width=30, padx=2, pady=2, font=("Arial", 18), text="Live Encryption", command=(lambda: live_main1()))
+    home_b4 = tkinter.Button(open_encrypter_gui, width=30, padx=2, pady=2, font=("Arial", 18), text="Quit", command=(lambda: quit()))
+    welcome_open_encrypter.pack()
+    home_b1.pack()
+    home_b2.pack()
+    home_b3.pack()
+    home_b4.pack()
+    open_encrypter_gui.mainloop()
+    # Finish
+
 if __name__ == '__main__':
-    from clearscreen import clean_shell
-    inv = False
-    while True:
-        clean_shell()
-        if inv:
-            print("Sorry, Invalid selection!!")
-        main_menu()
-        select_mode = 0
-        
+    main_menu()
