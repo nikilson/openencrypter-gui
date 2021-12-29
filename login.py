@@ -3,6 +3,9 @@ def main_login():
     from decrypt import Decrypter
     from os import getcwd, path
     from time import sleep
+    import writedata
+    import readdata
+    import deletedata
     # from clearscreen import clean_shell
     from getpass import getpass
     #global user_name, user_key, new_user, directory
@@ -10,12 +13,17 @@ def main_login():
     #global user_name, user_key, new_user, directory
     import tkinter
     from tkinter import messagebox
-    global open_encrypter_gui, user_name_input, user_key_input, user_name, user_key, status
+    global open_encrypter_main_menu_gui
+    global open_encrypter_gui, user_name_input, user_key_input, user_name, user_key, status, log_status
     # global user_name, user_key, new_user, directory, status
     # global log_status, key_directory, key_got, token_key
     status = True
+    def kill_login():
+        global log_status, open_encrypter_main_menu_gui
+        open_encrypter_main_menu_gui.destroy()
+        log_status = False
     def main_local():
-        global user_name_input, user_key_input, open_encrypter_gui
+        global user_name_input, user_key_input, open_encrypter_gui, log_status, user_name, user_key, status
         user_name = ""
         user_key = ""
         new_user = ""
@@ -35,7 +43,7 @@ def main_login():
             user_name = user_name_input.get()
             user_key = user_key_input.get()
             open_encrypter_gui.destroy()
-            print(user_name, user_key)
+            # print(user_name, user_key)
         user_name_label = tkinter.Label(open_encrypter_gui, text="User Name", relief="flat", font=("Arial", 22))
         user_name_input = tkinter.Entry(open_encrypter_gui, bd=1, width=30, font=("Arial", 18))
         user_key_label = tkinter.Label(open_encrypter_gui, text="Password", relief="flat", font=("Arial", 22))
@@ -70,7 +78,7 @@ def main_login():
             token_key = valid_file.read().decode()
         except:
             try:
-                print("Incorrect key!!")
+                messagebox.showerror("Key Error", message="Incorrect key!!")
                 valid_file = open(key_directory + "/private.key", 'rb')
                 token_key = valid_file.read().decode()
                 key_got = 0
@@ -83,7 +91,7 @@ def main_login():
             log_status = True
             status = False
         else:
-            sleep(4)
+            # sleep(4)
             # clean_shell()
             log_status = False
             directory = getcwd()
@@ -91,21 +99,35 @@ def main_login():
     while status == True:
         main_local()
     while log_status:
-        print("press 1 for WRITE new data\npress 2 for READ old data\npress 3 for REMOVE old data\npress 4 for QUIT")
-        select = str(input("Your option : "))
-        if select == '1':
-            import writedata
-            writedata.datawriter(user_name, user_key, directory)
-        elif select == '2':
-            import readdata
-            readdata.Reader(user_key, directory)
-        elif select == '3':
-            import deletedata
-            deletedata.text_deleter(new_user, user_key, directory)
-        elif select == '4':
-            break
-        else:
-            print("Retry!!!")
+        open_encrypter_main_menu_gui = tkinter.Tk()
+        open_encrypter_main_menu_gui.geometry("700x450")
+        main_menu_open_encrypter = tkinter.Label(open_encrypter_main_menu_gui, text=f"Welcome {user_name}\n", 
+            relief="flat", font=("Arial", 25), padx=10)
+        writedata_b = tkinter.Button(open_encrypter_main_menu_gui, width=30, padx=2, pady=2, font=("Arial", 18), text="Write Data", command=lambda: writedata.datawriter(user_name, user_key, directory))
+        # print("press 1 for WRITE new data\npress 2 for READ old data\npress 3 for REMOVE old data\npress 4 for QUIT")
+        readdata_b = tkinter.Button(open_encrypter_main_menu_gui, width=30, padx=2, pady=2, font=("Arial", 18), text="Read Data", command=lambda: readdata.Reader(user_key, directory))
+        deletedata_b = tkinter.Button(open_encrypter_main_menu_gui, width=30, padx=2, pady=2, font=("Arial", 18), text="Delete Data", command=lambda: deletedata.text_deleter(new_user, user_key, directory))
+        Logout_b = tkinter.Button(open_encrypter_main_menu_gui, width=30, padx=2, pady=2, font=("Arial", 18), text="Log out", command=lambda: kill_login())
+        main_menu_open_encrypter.pack()
+        readdata_b.pack()
+        writedata_b.pack()
+        deletedata_b.pack()
+        Logout_b.pack()
+        open_encrypter_main_menu_gui.mainloop()
+        # select = str(input("Your option : "))
+        # if select == '1':
+        #     import writedata
+        #     writedata.datawriter(user_name, user_key, directory)
+        # elif select == '2':
+        #     import readdata
+        #     readdata.Reader(user_key, directory)
+        # elif select == '3':
+        #     import deletedata
+        #     deletedata.text_deleter(new_user, user_key, directory)
+        # elif select == '4':
+        #     break
+        # else:
+        #     print("Retry!!!")
     return status
 if __name__ == '__main__':
     main_login()
