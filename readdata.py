@@ -1,35 +1,66 @@
 from os import listdir, path
 from time import sleep
-from clearscreen import clean_shell, clear_clipboard
+import tkinter
+from tkinter import ttk
+# from clearscreen import clean_shell, clear_clipboard
 from pyperclip import copy as clipcopier
 from threading import Thread
-#path = "E:\\Productivity\\Documents\\sdrowssap\\Rinaldo"
-def Reader(password, directory):
-    clean_shell()
-    print("Press 1 >> Passwords\nPress 2 >> Plain Text\nPress 3 >> Quit")
-    select_pass_text = input("\nEnter your selection, Defualt(Passwords) : ")
-    try:
-        select_pass_text = int(select_pass_text)
-    except:
-        select_pass_text = 0
+# path = "E:\\Productivity\\Documents\\sdrowssap\\Rinaldo"
+def Reader(password, mydirectory):
+    # clean_shell()
+    global select_pass_text, directory, combo_box
+    directory = mydirectory
+    select_pass_text = 1
+    # def select_drop(num):
+    #     global select_pass_text
+    #     select_pass_text = num
+    my_list = []
+    open_encrypter_gui = tkinter.Tk()
+    open_encrypter_gui_canvas = tkinter.Canvas(open_encrypter_gui, width="700", height="300")
+    open_encrypter_gui_canvas.grid(columnspan=3, rowspan=4)
+    welcome_open_encrypter = tkinter.Label(open_encrypter_gui, text="Select your data", 
+        relief="flat", font=("Arial", 25), padx=10)
+    welcome_open_encrypter.grid(row=0, column=1)
+    passwords_radio = tkinter.Radiobutton(open_encrypter_gui, text="Passwords", font=("Arial", 18), value=1, command=lambda: select_drop(1))
+    passwords_radio.grid(row=1, column=0)
+    text_radio = tkinter.Radiobutton(open_encrypter_gui, text="Texts", font=("Arial", 18), value=2, command=lambda: select_drop(2))
+    text_radio.grid(row=1, column=1)
+    # print("Press 1 >> Passwords\nPress 2 >> Plain Text\nPress 3 >> Quit")
+    # select_pass_text = input("\nEnter your selection, Defualt(Passwords) : ")
+    clip_btn = tkinter.Button(open_encrypter_gui, width=20, padx=2, pady=2, font=("Arial", 18), text="Copy to Clipboard", command=lambda: print("Login"))
+    clip_btn.grid(row=2, column=2)
+    show_btn = tkinter.Button(open_encrypter_gui, width=20, padx=2, pady=2, font=("Arial", 18), text="Show Everything", command=lambda: print("Login"))
+    show_btn.grid(row=2, column=1)
+    exit_btn = tkinter.Button(open_encrypter_gui, width=20, padx=2, pady=2, font=("Arial", 18), text="Exit", command=lambda: print("Login"))
+    exit_btn.grid(row=2, column=0)
+    combo_box = ttk.Combobox(open_encrypter_gui, width=20, font=("Arial", 18), values=my_list)
+    combo_box.grid(row=3, column=0)
     private_key = path.join(directory, ".keys")
     private_key = private_key + "/private.key"
-    if select_pass_text == 2:
-        directory = path.join(directory, ".text")
-    elif select_pass_text == 3:
-        directory = "exit"
-    else:
-        directory = path.join(directory, ".passwords")
-    message_list = []
-    if directory != "exit":
-        for file_det in listdir(directory):
-            if file_det.endswith(".bin"):
-                message_list.append(file_det)
-        for no, files in enumerate(message_list):      
-            # Prints only text file present in My Folder
-            print(files[:-4], " >> " ,no)
-        print("exit - To go mainmenu")
-        selection = input("Please enter your selection : ")
+    def select_drop(num):
+        global select_pass_text, directory, message_list, my_values, combo_box
+        select_pass_text = num
+        directory = mydirectory
+        if select_pass_text == 2:
+            directory = path.join(directory, ".text")
+        elif select_pass_text == 3:
+            directory = "exit"
+        else:
+            directory = path.join(directory, ".passwords")
+        message_list = []
+        my_values = []
+        if directory != "exit":
+            for file_det in listdir(directory):
+                if file_det.endswith(".bin"):
+                    message_list.append(file_det)
+            for no, files in enumerate(message_list):      
+                # Prints only text file present in My Folder
+                # print(files[:-4], " >> " ,no)
+                my_values.append(files[:4])
+            print("exit - To go mainmenu")
+            # selection = input("Please enter your selection : ")
+        combo_box["values"] = my_values
+    open_encrypter_gui.mainloop()
     try:
         selection = int(selection)
         if (len(message_list) >= selection) and len(message_list) >= 0:
@@ -74,6 +105,6 @@ def Reader(password, directory):
             print(f"The {state_text} is copied into the clipboard use it within 45 Seconds !!!")
         print("\nThe screen will be cleared within 30 Seconds!!!")
         sleep(30)
-        clean_shell()
+        # clean_shell()
     except:
         pass

@@ -13,7 +13,7 @@ def main_login():
     #global user_name, user_key, new_user, directory
     import tkinter
     from tkinter import messagebox
-    global open_encrypter_main_menu_gui
+    global open_encrypter_main_menu_gui, directory
     global open_encrypter_gui, user_name_input, user_key_input, user_name, user_key, status, log_status
     # global user_name, user_key, new_user, directory, status
     # global log_status, key_directory, key_got, token_key
@@ -24,13 +24,15 @@ def main_login():
         log_status = False
     def main_local():
         global user_name_input, user_key_input, open_encrypter_gui, log_status, user_name, user_key, status
+        global directory
         user_name = ""
         user_key = ""
         new_user = ""
         directory = getcwd()
         open_encrypter_gui = tkinter.Tk()
-        open_encrypter_gui.geometry("700x450")
-        welcome_open_encrypter = tkinter.Label(open_encrypter_gui, text="Login Menu\n", 
+        open_encrypter_gui_canvas = tkinter.Canvas(open_encrypter_gui, width="700", height="300")
+        open_encrypter_gui_canvas.grid(columnspan=3, rowspan=4)
+        welcome_open_encrypter = tkinter.Label(open_encrypter_gui, text="Login Menu", 
             relief="flat", font=("Arial", 25), padx=10)
         def go_back():
             global open_encrypter_gui, status
@@ -51,7 +53,7 @@ def main_login():
         quit_button = tkinter.Button(open_encrypter_gui, width=10, padx=2, pady=2, font=("Arial", 18), text="Quit", command=lambda: quit())
         go_back_button = tkinter.Button(open_encrypter_gui, width=10, padx=2, pady=2, font=("Arial", 18), text="Back", command=lambda: go_back())
         submit_button = tkinter.Button(open_encrypter_gui, width=10, padx=2, pady=2, font=("Arial", 18), text="Submit", command=lambda: submit())
-        welcome_open_encrypter.grid(row=0)
+        welcome_open_encrypter.grid(row=0, column=1)
         user_name_label.grid(row=1, column=0)
         user_name_input.grid(row=1, column=1)
         user_key_label.grid(row=2, column=0)
@@ -100,19 +102,20 @@ def main_login():
         main_local()
     while log_status:
         open_encrypter_main_menu_gui = tkinter.Tk()
-        open_encrypter_main_menu_gui.geometry("700x450")
-        main_menu_open_encrypter = tkinter.Label(open_encrypter_main_menu_gui, text=f"Welcome {user_name}\n", 
+        open_encrypter_main_menu_gui_canvas = tkinter.Canvas(open_encrypter_main_menu_gui, width="700", height="450")
+        open_encrypter_main_menu_gui_canvas.grid(columnspan=1, rowspan=5)
+        main_menu_open_encrypter = tkinter.Label(open_encrypter_main_menu_gui, text=f"Welcome {user_name}!!", 
             relief="flat", font=("Arial", 25), padx=10)
         writedata_b = tkinter.Button(open_encrypter_main_menu_gui, width=30, padx=2, pady=2, font=("Arial", 18), text="Write Data", command=lambda: writedata.datawriter(user_name, user_key, directory))
         # print("press 1 for WRITE new data\npress 2 for READ old data\npress 3 for REMOVE old data\npress 4 for QUIT")
         readdata_b = tkinter.Button(open_encrypter_main_menu_gui, width=30, padx=2, pady=2, font=("Arial", 18), text="Read Data", command=lambda: readdata.Reader(user_key, directory))
         deletedata_b = tkinter.Button(open_encrypter_main_menu_gui, width=30, padx=2, pady=2, font=("Arial", 18), text="Delete Data", command=lambda: deletedata.text_deleter(new_user, user_key, directory))
         Logout_b = tkinter.Button(open_encrypter_main_menu_gui, width=30, padx=2, pady=2, font=("Arial", 18), text="Log out", command=lambda: kill_login())
-        main_menu_open_encrypter.pack()
-        readdata_b.pack()
-        writedata_b.pack()
-        deletedata_b.pack()
-        Logout_b.pack()
+        main_menu_open_encrypter.grid(row=0, column=0)
+        readdata_b.grid(row=1, column=0)
+        writedata_b.grid(row=2, column=0)
+        deletedata_b.grid(row=3, column=0)
+        Logout_b.grid(row=4, column=0)
         open_encrypter_main_menu_gui.mainloop()
         # select = str(input("Your option : "))
         # if select == '1':
