@@ -68,7 +68,7 @@ def Reader(password, mydirectory):
             for no, files in enumerate(message_list):      
                 # Prints only text file present in My Folder
                 # print(files[:-4], " >> " ,no)
-                my_values.append(files[:4])
+                my_values.append(files[:-4])
             # print("exit - To go mainmenu")
             # selection = input("Please enter your selection : ")
         #  print(my_values)
