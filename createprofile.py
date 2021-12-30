@@ -25,6 +25,10 @@ def Create_Profifle():
             # print(user_name, user_key)
         global open_encrypter_gui, check
         open_encrypter_gui = tkinter.Tk()
+        open_encrypter_gui.title("Open Encrypter")
+        my_icon = path.join("assets", "key.png")
+        my_icon = tkinter.PhotoImage(file = my_icon)
+        open_encrypter_gui.iconphoto(False, my_icon)
         open_encrypter_gui_canvas = tkinter.Canvas(open_encrypter_gui, width ="600", height="400")
         # open_encrypter_gui.geometry("700x450")
         open_encrypter_gui_canvas.grid(columnspan=3, rowspan=4)

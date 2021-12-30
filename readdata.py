@@ -9,7 +9,7 @@ from threading import Thread
 # path = "E:\\Productivity\\Documents\\sdrowssap\\Rinaldo"
 def Reader(password, mydirectory):
     # clean_shell()
-    global select_pass_text, directory, combo_box, text_box
+    global select_pass_text, directory, combo_box, text_box, open_encrypter_gui
     directory = mydirectory
     select_pass_text = 1
     # def select_drop(num):
@@ -18,14 +18,15 @@ def Reader(password, mydirectory):
     def exit_func():
         global open_encrypter_gui, select_pass_text
         select_pass_text = 3
-        # open_encrypter_gui.destroy()
+        open_encrypter_gui.destroy()
     def clip_ask_fun(ask):
         global clip_ask
         clip_ask = ask
     my_list = []
     open_encrypter_gui = tkinter.Tk()
+    open_encrypter_gui.title("Open Encrypter")
     open_encrypter_gui_canvas = tkinter.Canvas(open_encrypter_gui, width="700", height="300")
-    open_encrypter_gui_canvas.grid(columnspan=3, rowspan=4)
+    open_encrypter_gui_canvas.grid(columnspan=3, rowspan=3)
     var = tkinter.IntVar()
     welcome_open_encrypter = tkinter.Label(open_encrypter_gui, text="Select your data", 
         relief="flat", font=("Arial", 25), padx=10)
@@ -37,16 +38,16 @@ def Reader(password, mydirectory):
     # print("Press 1 >> Passwords\nPress 2 >> Plain Text\nPress 3 >> Quit")
     # select_pass_text = input("\nEnter your selection, Defualt(Passwords) : ")
     clip_btn = tkinter.Button(open_encrypter_gui, width=20, padx=2, pady=2, font=("Arial", 18), text="Copy to Clipboard", command=lambda: butn_decrypt("y"))
-    clip_btn.grid(row=2, column=2)
+    clip_btn.grid(row=4, column=2)
     show_btn = tkinter.Button(open_encrypter_gui, width=20, padx=2, pady=2, font=("Arial", 18), text="Show Everything", command=lambda: butn_decrypt("n"))
-    show_btn.grid(row=2, column=1)
+    show_btn.grid(row=4, column=1)
     exit_btn = tkinter.Button(open_encrypter_gui, width=20, padx=2, pady=2, font=("Arial", 18), text="Exit", command=lambda: exit_func())
-    exit_btn.grid(row=2, column=0)
+    exit_btn.grid(row=4, column=0)
     combo_box = ttk.Combobox(open_encrypter_gui, width=40, font=("Arial", 18), values=my_list)
     open_encrypter_gui.option_add('*TCombobox*Listbox.font', ("Arial", 18))
-    combo_box.grid(row=3, columnspan=3)
-    text_box = tkinter.Text(open_encrypter_gui, height=15, width=60, padx=10, pady=10, font=("Arial", 14))
-    text_box.grid(row=4, columnspan=3)
+    combo_box.grid(row=2, columnspan=3)
+    text_box = tkinter.Text(open_encrypter_gui, height=10, width=60, padx=10, pady=10, font=("Arial", 14))
+    text_box.grid(row=3, columnspan=3)
     private_key = path.join(directory, ".keys")
     private_key = private_key + "/private.key"
     def select_drop(num):
@@ -65,7 +66,7 @@ def Reader(password, mydirectory):
             for file_det in listdir(directory):
                 if file_det.endswith(".bin"):
                     message_list.append(file_det)
-            for no, files in enumerate(message_list):      
+            for no, files in enumerate(message_list):
                 # Prints only text file present in My Folder
                 # print(files[:-4], " >> " ,no)
                 my_values.append(files[:-4])

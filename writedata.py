@@ -72,6 +72,7 @@ def datawriter(user_name, user_key, directory):
     from clearscreen import clean_shell
     from os import getcwd, path
     open_encrypter_gui = tkinter.Tk()
+    open_encrypter_gui.title("Open Encrypter")
     open_encrypter_gui_canvas = tkinter.Canvas(open_encrypter_gui, width ="600", height="700")
     # open_encrypter_gui.geometry("700x450")
     open_encrypter_gui_canvas.grid(columnspan=3, rowspan=8)

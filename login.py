@@ -30,6 +30,10 @@ def main_login():
         new_user = ""
         directory = getcwd()
         open_encrypter_gui = tkinter.Tk()
+        open_encrypter_gui.title("Open Encrypter")
+        my_icon1 = path.join("assets", "key.png")
+        my_icon1 = tkinter.PhotoImage(file = my_icon1)
+        open_encrypter_gui.iconphoto(False, my_icon1)
         open_encrypter_gui_canvas = tkinter.Canvas(open_encrypter_gui, width="700", height="300")
         open_encrypter_gui_canvas.grid(columnspan=3, rowspan=4)
         welcome_open_encrypter = tkinter.Label(open_encrypter_gui, text="Login Menu", 
@@ -102,8 +106,12 @@ def main_login():
         main_local()
     while log_status:
         open_encrypter_main_menu_gui = tkinter.Tk()
+        open_encrypter_main_menu_gui.title("Open Encrypter")
+        # my_icon2 = path.join("assets", "key.png")
+        # my_icon2 = tkinter.PhotoImage(file = my_icon2)
+        # open_encrypter_main_menu_gui.iconphoto(False, my_icon2)
         open_encrypter_main_menu_gui_canvas = tkinter.Canvas(open_encrypter_main_menu_gui, width="700", height="450")
-        open_encrypter_main_menu_gui_canvas.grid(columnspan=1, rowspan=5)
+        open_encrypter_main_menu_gui_canvas.grid(columnspan=1, rowspan=6)
         main_menu_open_encrypter = tkinter.Label(open_encrypter_main_menu_gui, text=f"Welcome {user_name}!!", 
             relief="flat", font=("Arial", 25), padx=10)
         writedata_b = tkinter.Button(open_encrypter_main_menu_gui, width=30, padx=2, pady=2, font=("Arial", 18), text="Write Data", command=lambda: writedata.datawriter(user_name, user_key, directory))

@@ -1,40 +1,78 @@
 from os import listdir, path, remove
-from clearscreen import clean_shell
+from tkinter import messagebox
+import tkinter
+from tkinter import ttk
+# from clearscreen import clean_shell
+def exit_func():
+    global open_encrypter_gui, select_pass_text
+    select_pass_text = 3
+    open_encrypter_gui.destroy()
 def text_deleter(user, key, directory):
-    clean_shell()
-    print("Press 1 >> Passwords\nPress 2 >> Plain Text\nPress 3 >> Quit")
-    select_pass_text = input("\nEnter your selection, Defualt(Quit) : ")
-    try:
-        select_pass_text = int(select_pass_text)
-    except:
-        select_pass_text = 0
-    if select_pass_text == 1:
-        directory = path.join(directory, ".passwords")
-    elif select_pass_text == 2:
-        directory = path.join(directory, ".text")
-    else:
-        directory = "exit"
-    message_list = []
-    if directory != "exit":
-        for file_det in listdir(directory):
-            if file_det.endswith(".bin"):
-                message_list.append(file_det)
-        for no, files in enumerate(message_list):      
-            # Prints only text file present in My Folder
-            print(files[:-4], " >> " ,no)
-        print("exit - To go mainmenu from REMOVING data")
-        selection = input("Please enter your selection : ")
-    try:
-        selection = int(selection)
-        if (len(message_list) >= selection) and len(message_list) >= 0:
-            dir = path.join(directory, message_list[selection])
-            ask_sure_delete = input("Do you really want delete {} ?? (yes or no) : ".format(message_list[selection][:4]))
-            if ask_sure_delete.lower() == "yes":
-                remove(dir)
-                print("\nText {} has been removed successfully!!!".format(message_list[selection][:4]))
-            else:
-                print("\nThe process is reverted!!")
+    # clean_shell()
+    global mydirectory, combo_box, open_encrypter_gui
+    mydirectory = directory
+    my_list = []
+    open_encrypter_gui = tkinter.Tk()
+    open_encrypter_gui.title("Open Encrypter")
+    open_encrypter_gui_canvas = tkinter.Canvas(open_encrypter_gui, width="700", height="300")
+    open_encrypter_gui_canvas.grid(columnspan=3, rowspan=4)
+    var = tkinter.IntVar()
+    welcome_open_encrypter = tkinter.Label(open_encrypter_gui, text="Delete Data", 
+        relief="flat", font=("Arial", 25), padx=10)
+    welcome_open_encrypter.grid(row=0, column=0)
+    passwords_radio = tkinter.Radiobutton(open_encrypter_gui, variable=var, text="Passwords", font=("Arial", 18), value=1, command=lambda: select_drop(1))
+    passwords_radio.grid(row=1, column=0)
+    text_radio = tkinter.Radiobutton(open_encrypter_gui, variable=var, text="Texts", font=("Arial", 18), value=2, command=lambda: select_drop(2))
+    text_radio.grid(row=1, column=1)
+    combo_box = ttk.Combobox(open_encrypter_gui, width=40, font=("Arial", 18), values=my_list)
+    open_encrypter_gui.option_add('*TCombobox*Listbox.font', ("Arial", 18))
+    combo_box.grid(row=2, columnspan=2, column=0)
+    submit_pass_btn = tkinter.Button(open_encrypter_gui, width=20, padx=2, pady=2, font=("Arial", 18), text="Submit", command=lambda: delete_button())
+    exit_btn = tkinter.Button(open_encrypter_gui, width=20, padx=2, pady=2, font=("Arial", 18), text="Exit", command=lambda: exit_func())
+    submit_pass_btn.grid(row=3, column=1)
+    exit_btn.grid(row=3, column=0)
+    def select_drop(num):
+        global select_pass_text, directory, message_list, my_values, combo_box, mydirectory, combo_box
+        select_pass_text = num
+        directory = mydirectory
+        directory = path.join(directory, ".users")
+        directory = path.join(directory, user)
+        if select_pass_text == 2:
+            directory = path.join(directory, ".text")
+        elif select_pass_text == 3:
+            directory = "exit"
         else:
-            print("Invalid selection")
-    except:
-        pass
+            directory = path.join(directory, ".passwords")
+
+        message_list = []
+        my_values = []
+        if directory != "exit":
+            for file_det in listdir(directory):
+                if file_det.endswith(".bin"):
+                    message_list.append(file_det)
+            for no, files in enumerate(message_list):      
+                # Prints only text file present in My Folder
+                # print(files[:-4], " >> " ,no)
+                my_values.append(files[:-4])
+            # print("exit - To go mainmenu")
+            # selection = input("Please enter your selection : ")
+        # print(my_values)
+        combo_box["values"] = my_values
+
+    def delete_button():
+        global directory, combo_box, open_encrypter_gui
+        try:
+            dir = path.join(directory, combo_box.get() + ".bin")
+            res = messagebox.askquestion("Exit Application", message=f"Do you really want to delete {combo_box.get()}!!!")
+            if res == "yes":
+                remove(dir)
+                messagebox.showinfo("Deleted", message="Text {} has been removed successfully!!!".format(message_list[selection][:4]))
+            else:
+                messagebox.showinfo("Return", message="Returning to main application")
+        except:
+            pass
+    open_encrypter_gui.mainloop()
+
+if __name__ == '__main__':
+    my_secret_key = "E:\\Productivity\\Projects\\Coding\\Python\\openencrypter-gui\\.users\\rinaldo\\.keys\\private.key"
+    text_deleter("rinaldo", my_secret_key, "E:\\Productivity\\Projects\\Coding\\Python\\openencrypter-gui")

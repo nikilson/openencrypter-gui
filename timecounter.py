@@ -3,6 +3,7 @@ from tkinter import ttk
 
 top = tkinter.Tk()
 top.geometry("700x450")
+top.title("timecounter")
 # welcome_open_encrypter_string = tkinter.StringVar()
 # welcome_open_encrypter_string.set("Welcome to Open Encrypter!!!")
 
@@ -22,7 +23,7 @@ welcome_open_encrypter.pack()
 home_b1 = tkinter.Button(top, width=30, padx=2, pady=2, font=("Arial", 18), text="Login", command=lambda: combo_picker())
 home_b1.pack()
 home_b2 = tkinter.Button(top, width=30, padx=2, pady=2, font=("Arial", 18), text="Register New Profile", command=lambda: print("Register"))
-home_b2.grid()
+home_b2.pack()
 home_b3 = tkinter.Button(top, width=30, padx=2, pady=2, font=("Arial", 18), text="Live Encryption", command= lambda: home_b2.pack_forget())
 home_b3.pack()
 home_b4 = tkinter.Button(top, width=30, padx=2, pady=2, font=("Arial", 18), text="Quit", command=lambda: print("quit"))

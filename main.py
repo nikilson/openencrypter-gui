@@ -1,7 +1,12 @@
 def main_menu():
     import tkinter
     global open_encrypter_gui
+    from os import path
     open_encrypter_gui = tkinter.Tk()
+    open_encrypter_gui.title("Open Encrypter")
+    my_icon = path.join("assets", "key.png")
+    my_icon = tkinter.PhotoImage(file = my_icon)
+    open_encrypter_gui.iconphoto(False, my_icon)
     open_encrypter_gui_canvas = tkinter.Canvas(open_encrypter_gui, width="700", height="450")
     open_encrypter_gui_canvas.grid(rowspan=5)
     def Create_Profifle1():
