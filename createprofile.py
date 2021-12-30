@@ -28,7 +28,7 @@ def Create_Profifle():
         open_encrypter_gui_canvas = tkinter.Canvas(open_encrypter_gui, width ="600", height="400")
         # open_encrypter_gui.geometry("700x450")
         open_encrypter_gui_canvas.grid(columnspan=3, rowspan=4)
-        welcome_open_encrypter = tkinter.Label(open_encrypter_gui, text="Register New Profile\n", 
+        welcome_open_encrypter = tkinter.Label(open_encrypter_gui, text="Register New Profile", 
             relief="flat", font=("Arial", 25))
         user_name_label = tkinter.Label(open_encrypter_gui, text="User Name", relief="flat", font=("Arial", 22))
         user_name_input = tkinter.Entry(open_encrypter_gui, bd=1, width=30, font=("Arial", 18))
@@ -41,11 +41,11 @@ def Create_Profifle():
         submit_button = tkinter.Button(open_encrypter_gui, width=10, padx=2, pady=2, font=("Arial", 18), text="Submit", command=lambda: submit())
         welcome_open_encrypter.grid(row=0, column=1)
         user_name_label.grid(row=1, column=0)
-        user_name_input.grid(row=1, column=1)
+        user_name_input.grid(row=1, column=1, columnspan=2)
         user_key_label.grid(row=2, column=0)
-        user_key_input.grid(row=2, column=1)
+        user_key_input.grid(row=2, column=1, columnspan=2)
         user_key_label2.grid(row=3, column=0)
-        user_key_input2.grid(row=3, column=1)
+        user_key_input2.grid(row=3, column=1, columnspan=2)
         quit_button.grid(row=4, column=0)
         go_back_button.grid(row=4, column=1)
         submit_button.grid(row=4, column=2)
