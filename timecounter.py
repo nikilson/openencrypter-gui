@@ -58,4 +58,16 @@ R3 = tkinter.Radiobutton(top, text="Option 3", variable=var, value=3, command=la
 R3.pack( anchor = tkinter.W)
 comboExample = ttk.Combobox(top, width=20, font=("Arial", 18), values=my_list)
 comboExample.pack()
+text_box = tkinter.Text(top, height=10, width=30, padx=10, pady=10, font=("Arial", 14))
+text_box.insert(tkinter.END, "First text is hello")
+text_box.insert(tkinter.END, "\nSecond text is welcome")
+from time import sleep
+from threading import Thread
+def clear_text_box():
+    global text
+    sleep(5)
+    text_box.delete(1.0, "end")
+clear_text_box_thread = Thread(target=clear_text_box)
+clear_text_box_thread.start()
+text_box.pack()
 top.mainloop()
