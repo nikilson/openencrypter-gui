@@ -1,9 +1,12 @@
 import tkinter
 from tkinter import ttk
+from ttkthemes import ThemedTk
 
 top = tkinter.Tk()
+# top.set_theme("blue")
 top.geometry("700x450")
 top.title("timecounter")
+top.configure(bg="#ed9121")
 # welcome_open_encrypter_string = tkinter.StringVar()
 # welcome_open_encrypter_string.set("Welcome to Open Encrypter!!!")
 
@@ -17,16 +20,16 @@ def my_print():
 # def sel():
 #    selection = "You selected the option " + str(var.get())
 #    label.config(text = selection)
-welcome_open_encrypter = tkinter.Label(top, text="Welcome to Open Encrypter!!!\n",
+welcome_open_encrypter = tkinter.Label(top, bg="#ed9121", text="Welcome to Open Encrypter!!!\n",
     relief="flat", font=("Arial", 22))
 welcome_open_encrypter.pack()
-home_b1 = tkinter.Button(top, width=30, padx=2, pady=2, font=("Arial", 18), text="Login", command=lambda: combo_picker())
+home_b1 = tkinter.Button(top, bg="#20bebe", fg="white", width=30, padx=2, pady=2, font=("Arial", 18), text="Login", command=lambda: combo_picker())
 home_b1.pack()
-home_b2 = tkinter.Button(top, width=30, padx=2, pady=2, font=("Arial", 18), text="Register New Profile", command=lambda: print("Register"))
+home_b2 = tkinter.Button(top, bg="#20bebe", fg="white", width=30, padx=2, pady=2, font=("Arial", 18), text="Register New Profile", command=lambda: print("Register"))
 home_b2.pack()
-home_b3 = tkinter.Button(top, width=30, padx=2, pady=2, font=("Arial", 18), text="Live Encryption", command= lambda: home_b2.pack_forget())
+home_b3 = tkinter.Button(top, bg="#20bebe", fg="white", width=30, padx=2, pady=2, font=("Arial", 18), text="Live Encryption", command= lambda: home_b2.pack_forget())
 home_b3.pack()
-home_b4 = tkinter.Button(top, width=30, padx=2, pady=2, font=("Arial", 18), text="Quit", command=lambda: print("quit"))
+home_b4 = tkinter.Button(top, bg="#20bebe", fg="white", width=30, padx=2, pady=2, font=("Arial", 18), text="Quit", command=lambda: print("quit"))
 home_b4.pack()
 # my_input = tkinter.Entry(top, width=30, font=("Arial", 18), show="*")
 # my_input.pack()
@@ -51,11 +54,11 @@ def list_sel(num):
 def combo_picker():
     global comboExample
     print(comboExample.get())
-R1 = tkinter.Radiobutton(top, text="Option 1", variable=var, value=1, command=lambda: list_sel(1))
+R1 = tkinter.Radiobutton(top, bg="#ed9121", text="Option 1", variable=var, value=1, command=lambda: list_sel(1))
 R1.pack( anchor = tkinter.W )
-R2 = tkinter.Radiobutton(top, text="Option 2", variable=var, value=2, command=lambda: list_sel(2))
+R2 = tkinter.Radiobutton(top, bg="#ed9121",text="Option 2", variable=var, value=2, command=lambda: list_sel(2))
 R2.pack( anchor = tkinter.W )
-R3 = tkinter.Radiobutton(top, text="Option 3", variable=var, value=3, command=lambda: list_sel(3))
+R3 = tkinter.Radiobutton(top, bg="#ed9121",text="Option 3", variable=var, value=3, command=lambda: list_sel(3))
 R3.pack( anchor = tkinter.W)
 comboExample = ttk.Combobox(top, width=20, font=("Arial", 18), values=my_list)
 # comboExample.config(font="helv20")
