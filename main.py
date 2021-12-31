@@ -4,9 +4,9 @@ def main_menu():
     from os import path
     open_encrypter_gui = tkinter.Tk()
     open_encrypter_gui.title("Open Encrypter")
-    my_icon = path.join("assets", "key.png")
-    my_icon = tkinter.PhotoImage(file = my_icon)
-    open_encrypter_gui.iconphoto(False, my_icon)
+    # my_icon = path.join("assets", "key.png")
+    # my_icon = tkinter.PhotoImage(file = my_icon)
+    # open_encrypter_gui.iconphoto(False, my_icon)
     open_encrypter_gui_canvas = tkinter.Canvas(open_encrypter_gui, width="700", height="450")
     open_encrypter_gui_canvas.grid(rowspan=5)
     def Create_Profifle1():
@@ -31,10 +31,10 @@ def main_menu():
         # open_encrypter_gui.destroy()
     welcome_open_encrypter = tkinter.Label(open_encrypter_gui, text="Welcome to Open Encrypter!!!", 
         relief="flat", font=("Arial", 22))
-    home_b1 = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="white", width=30, padx=2, pady=2, font=("Arial", 18), text="Login", command=(lambda: main_login1()))
-    home_b2 = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="white", width=30, padx=2, pady=2, font=("Arial", 18), text="Register New Profile", command=(lambda: Create_Profifle1()))
-    home_b3 = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="white", width=30, padx=2, pady=2, font=("Arial", 18), text="Live Encryption", command=(lambda: live_main1()))
-    home_b4 = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="white", width=30, padx=2, pady=2, font=("Arial", 18), text="Quit", command=(lambda: quit()))
+    home_b1 = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="black", width=30, padx=2, pady=2, font=("Arial", 18), text="Login", command=(lambda: main_login1()))
+    home_b2 = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="black", width=30, padx=2, pady=2, font=("Arial", 18), text="Register New Profile", command=(lambda: Create_Profifle1()))
+    home_b3 = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="black", width=30, padx=2, pady=2, font=("Arial", 18), text="Live Encryption", command=(lambda: live_main1()))
+    home_b4 = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="black", width=30, padx=2, pady=2, font=("Arial", 18), text="Quit", command=(lambda: quit()))
     welcome_open_encrypter.grid(row=0)
     home_b1.grid(row=1)
     home_b2.grid(row=2)

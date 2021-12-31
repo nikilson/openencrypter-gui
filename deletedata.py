@@ -27,8 +27,8 @@ def text_deleter(user, key, directory):
     combo_box = ttk.Combobox(open_encrypter_gui, width=40, font=("Arial", 18), values=my_list)
     open_encrypter_gui.option_add('*TCombobox*Listbox.font', ("Arial", 18))
     combo_box.grid(row=2, columnspan=2, column=0)
-    submit_pass_btn = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="white", width=20, padx=2, pady=2, font=("Arial", 18), text="Submit", command=lambda: delete_button())
-    exit_btn = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="white", width=20, padx=2, pady=2, font=("Arial", 18), text="Exit", command=lambda: exit_func())
+    submit_pass_btn = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="black", width=20, padx=2, pady=2, font=("Arial", 18), text="Submit", command=lambda: delete_button())
+    exit_btn = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="black", width=20, padx=2, pady=2, font=("Arial", 18), text="Exit", command=lambda: exit_func())
     submit_pass_btn.grid(row=3, column=1)
     exit_btn.grid(row=3, column=0)
     def select_drop(num):
