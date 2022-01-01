@@ -1,4 +1,4 @@
-from os import listdir, path, remove
+from os import listdir, path, remove, getcwd
 from tkinter import messagebox
 import tkinter
 from tkinter import ttk
@@ -14,6 +14,15 @@ def text_deleter(user, key, directory):
     my_list = []
     open_encrypter_gui = tkinter.Tk()
     open_encrypter_gui.title("Open Encrypter")
+    Tk_Width = 680  
+    Tk_Height = 300
+
+    #calculate coordination of screen and window form
+    x_Left = int(open_encrypter_gui.winfo_screenwidth()/2 - Tk_Width/2)
+    y_Top = int(open_encrypter_gui.winfo_screenheight()/2 - Tk_Height/2)
+     
+    # Write following format for center screen
+    open_encrypter_gui.geometry( "%dx%d+%d+%d" % (Tk_Width, Tk_Height, x_Left, y_Top))
     open_encrypter_gui_canvas = tkinter.Canvas(open_encrypter_gui, width="700", height="300")
     open_encrypter_gui_canvas.grid(columnspan=3, rowspan=4)
     var = tkinter.IntVar()
@@ -34,7 +43,7 @@ def text_deleter(user, key, directory):
     def select_drop(num):
         global select_pass_text, directory, message_list, my_values, combo_box, mydirectory, combo_box
         select_pass_text = num
-        directory = mydirectory
+        directory = getcwd()
         directory = path.join(directory, ".users")
         directory = path.join(directory, user)
         if select_pass_text == 2:

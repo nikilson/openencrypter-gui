@@ -26,6 +26,15 @@ def Create_Profifle():
         global open_encrypter_gui, check
         open_encrypter_gui = tkinter.Tk()
         open_encrypter_gui.title("Open Encrypter")
+        Tk_Width = 800  
+        Tk_Height = 500
+
+        #calculate coordination of screen and window form
+        x_Left = int(open_encrypter_gui.winfo_screenwidth()/2 - Tk_Width/2)
+        y_Top = int(open_encrypter_gui.winfo_screenheight()/2 - Tk_Height/2)
+         
+        # Write following format for center screen
+        open_encrypter_gui.geometry( "%dx%d+%d+%d" % (Tk_Width, Tk_Height, x_Left, y_Top))
         # my_icon = path.join("assets", "key.png")
         # my_icon = tkinter.PhotoImage(file = my_icon)
         # open_encrypter_gui.iconphoto(False, my_icon)

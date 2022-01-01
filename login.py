@@ -31,6 +31,15 @@ def main_login():
         directory = getcwd()
         open_encrypter_gui = tkinter.Tk()
         open_encrypter_gui.title("Open Encrypter")
+        Tk_Width = 700  
+        Tk_Height = 300
+
+        #calculate coordination of screen and window form
+        x_Left = int(open_encrypter_gui.winfo_screenwidth()/2 - Tk_Width/2)
+        y_Top = int(open_encrypter_gui.winfo_screenheight()/2 - Tk_Height/2)
+         
+        # Write following format for center screen
+        open_encrypter_gui.geometry( "%dx%d+%d+%d" % (Tk_Width, Tk_Height, x_Left, y_Top))
         # my_icon1 = path.join("assets", "key.png")
         # my_icon1 = tkinter.PhotoImage(file = my_icon1)
         # open_encrypter_gui.iconphoto(False, my_icon1)
@@ -107,6 +116,15 @@ def main_login():
     while log_status:
         open_encrypter_main_menu_gui = tkinter.Tk()
         open_encrypter_main_menu_gui.title("Open Encrypter")
+        Tk_Width = 700  
+        Tk_Height = 450
+
+        #calculate coordination of screen and window form
+        x_Left = int(open_encrypter_main_menu_gui.winfo_screenwidth()/2 - Tk_Width/2)
+        y_Top = int(open_encrypter_main_menu_gui.winfo_screenheight()/2 - Tk_Height/2)
+         
+        # Write following format for center screen
+        open_encrypter_main_menu_gui.geometry( "%dx%d+%d+%d" % (Tk_Width, Tk_Height, x_Left, y_Top))
         # my_icon2 = path.join("assets", "key.png")
         # my_icon2 = tkinter.PhotoImage(file = my_icon2)
         # open_encrypter_main_menu_gui.iconphoto(False, my_icon2)
@@ -117,7 +135,7 @@ def main_login():
         writedata_b = tkinter.Button(open_encrypter_main_menu_gui, bg="#20bebe", fg="black", width=30, padx=2, pady=2, font=("Arial", 18), text="Write Data", command=lambda: writedata.datawriter(user_name, user_key, directory))
         # print("press 1 for WRITE new data\npress 2 for READ old data\npress 3 for REMOVE old data\npress 4 for QUIT")
         readdata_b = tkinter.Button(open_encrypter_main_menu_gui, bg="#20bebe", fg="black", width=30, padx=2, pady=2, font=("Arial", 18), text="Read Data", command=lambda: readdata.Reader(user_key, directory))
-        deletedata_b = tkinter.Button(open_encrypter_main_menu_gui, bg="#20bebe", fg="black", width=30, padx=2, pady=2, font=("Arial", 18), text="Delete Data", command=lambda: deletedata.text_deleter(new_user, user_key, directory))
+        deletedata_b = tkinter.Button(open_encrypter_main_menu_gui, bg="#20bebe", fg="black", width=30, padx=2, pady=2, font=("Arial", 18), text="Delete Data", command=lambda: deletedata.text_deleter(user_name, user_key, directory))
         Logout_b = tkinter.Button(open_encrypter_main_menu_gui, bg="#20bebe", fg="black", width=30, padx=2, pady=2, font=("Arial", 18), text="Log out", command=lambda: kill_login())
         main_menu_open_encrypter.grid(row=0, column=0)
         readdata_b.grid(row=1, column=0)

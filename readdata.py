@@ -25,6 +25,15 @@ def Reader(password, mydirectory):
     my_list = []
     open_encrypter_gui = tkinter.Tk()
     open_encrypter_gui.title("Open Encrypter")
+    Tk_Width = 850  
+    Tk_Height = 600
+
+    #calculate coordination of screen and window form
+    x_Left = int(open_encrypter_gui.winfo_screenwidth()/2 - Tk_Width/2)
+    y_Top = int(open_encrypter_gui.winfo_screenheight()/2 - Tk_Height/2)
+     
+    # Write following format for center screen
+    open_encrypter_gui.geometry( "%dx%d+%d+%d" % (Tk_Width, Tk_Height, x_Left, y_Top))
     open_encrypter_gui_canvas = tkinter.Canvas(open_encrypter_gui, width="700", height="300")
     open_encrypter_gui_canvas.grid(columnspan=3, rowspan=3)
     var = tkinter.IntVar()
