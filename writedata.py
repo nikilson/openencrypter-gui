@@ -27,13 +27,14 @@ def my_exit():
     global open_encrypter_gui
     open_encrypter_gui.destroy()
 def my_text_writer():
-    global message, text_input, title_name_input, key_path, store_path
+    global message, text_input, title_name_input, key_path, store_path, open_encrypter_gui
     message = text_input.get("1.0", "end-1c")
     title = title_name_input.get()
     Encrypter(title, message, key_path + '/public.key', store_path)
     messagebox.showinfo("Sucessful!!", message=f"Text {title} has been written sucessfully!!!")
+    open_encrypter_gui.destroy()
 def password_collect_service():
-    global user_key_input, user_key_input2, store_path, pass_store_path, message, text_input, title, key_path, title_name_input
+    global user_key_input, user_key_input2, store_path, pass_store_path, message, text_input, title, key_path, title_name_input, open_encrypter_gui
     store_path = pass_store_path
     password_1 = user_key_input.get()
     password_2 = user_key_input2.get()
@@ -44,6 +45,7 @@ def password_collect_service():
         message = f"{service_name}|service ends the user is :{user_name_service}|user ends the password is :{password_2}"
         Encrypter(title, message, key_path + '/public.key', store_path)
         messagebox.showinfo("Sucessful!!", message=f"Password {title} has been written sucessfully!!!")
+        open_encrypter_gui.destroy()
     else:
         messagebox.showerror("Password Error", message="Sorry, Please enter the same password!")
 def create_password():

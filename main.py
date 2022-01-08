@@ -30,10 +30,10 @@ def main_menu():
         main_login()
     def live_main1():
         global open_encrypter_gui
-        messagebox.showinfo("Under Development", "This feature will be added in the upcomming build!!")
-        # from liveenc import live_main
-        ##open_encrypter_gui.destroy()
-        # live_main()
+        #messagebox.showinfo("Under Development", "This feature will be added in the upcomming build!!")
+        from liveenc import live_main
+        open_encrypter_gui.destroy()
+        live_main()
     def main_quit():
         global open_encrypter_gui
         open_encrypter_gui.destroy()

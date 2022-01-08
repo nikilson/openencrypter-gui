@@ -5,7 +5,13 @@ def clean_shell():
     else:
         scr = system('clear')
 def clear_clipboard():
+    import subprocess
     from time import sleep
-    from os import system
+    # from os import system
     sleep(45)
-    system('cmd /c "echo off | clip"')
+    #hide console
+    si = subprocess.STARTUPINFO()
+    si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+    """ passing starttupinfo=si argument into subprocess.call function"""
+    subprocess.call('cmd /c "echo off | clip"', startupinfo=si)
+    # system('cmd /c "echo off | clip"')
