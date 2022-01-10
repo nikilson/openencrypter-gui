@@ -1,6 +1,6 @@
 from cryptography.fernet import Fernet
 from time import sleep
-from clearscreen import clean_shell
+# from clearscreen import clean_shell
 from pyperclip import copy as clipcopier
 from threading import Thread
 from clearscreen import clear_clipboard
