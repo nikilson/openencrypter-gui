@@ -9,54 +9,60 @@ from threading import Thread
 # path = "E:\\Productivity\\Documents\\sdrowssap\\Rinaldo"
 def Reader(password, mydirectory):
     # clean_shell()
-    global select_pass_text, directory, combo_box, text_box, open_encrypter_gui
+    global select_pass_text, directory, combo_box, text_box, read_data_gui
     directory = mydirectory
     select_pass_text = 1
     # def select_drop(num):
     #     global select_pass_text
     #     select_pass_text = num
     def exit_func():
-        global open_encrypter_gui, select_pass_text
+        global read_data_gui, select_pass_text
         select_pass_text = 3
-        open_encrypter_gui.destroy()
+        read_data_gui.destroy()
     def clip_ask_fun(ask):
         global clip_ask
         clip_ask = ask
     my_list = []
-    open_encrypter_gui = tkinter.Tk()
-    open_encrypter_gui.title("Open Encrypter")
-    Tk_Width = 850  
+    read_data_gui = tkinter.Tk()
+    read_data_gui.title("Open Encrypter")
+    Tk_Width = 700  
     Tk_Height = 600
 
     #calculate coordination of screen and window form
-    x_Left = int(open_encrypter_gui.winfo_screenwidth()/2 - Tk_Width/2)
-    y_Top = int(open_encrypter_gui.winfo_screenheight()/2 - Tk_Height/2)
+    x_Left = int(read_data_gui.winfo_screenwidth()/2 - Tk_Width/2)
+    y_Top = int(read_data_gui.winfo_screenheight()/2 - Tk_Height/2)
      
     # Write following format for center screen
-    open_encrypter_gui.geometry( "%dx%d+%d+%d" % (Tk_Width, Tk_Height, x_Left, y_Top))
-    open_encrypter_gui_canvas = tkinter.Canvas(open_encrypter_gui, width="700", height="300")
-    open_encrypter_gui_canvas.grid(columnspan=3, rowspan=3)
+    read_data_gui.geometry( "%dx%d+%d+%d" % (Tk_Width, Tk_Height, x_Left, y_Top))
+    read_data_gui_canvas = tkinter.Canvas(read_data_gui, width="700", height="300")
+    read_data_gui_canvas.grid(columnspan=5, rowspan=3)
     var = tkinter.IntVar()
-    welcome_open_encrypter = tkinter.Label(open_encrypter_gui, text="Select your data", 
-        relief="flat", font=("Arial", 25), padx=10)
-    welcome_open_encrypter.grid(row=0, column=1)
-    passwords_radio = tkinter.Radiobutton(open_encrypter_gui, variable=var, text="Passwords", font=("Arial", 18), value=1, command=lambda: select_drop(1))
-    passwords_radio.grid(row=1, column=0)
-    text_radio = tkinter.Radiobutton(open_encrypter_gui, variable=var, text="Texts", font=("Arial", 18), value=2, command=lambda: select_drop(2))
-    text_radio.grid(row=1, column=1)
+    welcome_open_encrypter = tkinter.Label(read_data_gui, text="Select your data", 
+        relief="flat", font=("Arial", 25))
+    
+    passwords_radio = tkinter.Radiobutton(read_data_gui, variable=var, text="Passwords", font=("Arial", 18), value=1, command=lambda: select_drop(1))
+    
+    text_radio = tkinter.Radiobutton(read_data_gui, variable=var, text="Texts", font=("Arial", 18), value=2, command=lambda: select_drop(2))
+    
     # print("Press 1 >> Passwords\nPress 2 >> Plain Text\nPress 3 >> Quit")
     # select_pass_text = input("\nEnter your selection, Defualt(Passwords) : ")
-    clip_btn = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="black", width=20, padx=2, pady=2, font=("Arial", 18), text="Copy to Clipboard", command=lambda: butn_decrypt("y"))
-    clip_btn.grid(row=4, column=2)
-    show_btn = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="black", width=20, padx=2, pady=2, font=("Arial", 18), text="Show Everything", command=lambda: butn_decrypt("n"))
-    show_btn.grid(row=4, column=1)
-    exit_btn = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="black", width=20, padx=2, pady=2, font=("Arial", 18), text="Exit", command=lambda: exit_func())
-    exit_btn.grid(row=4, column=0)
-    combo_box = ttk.Combobox(open_encrypter_gui, width=40, font=("Arial", 18), values=my_list)
-    open_encrypter_gui.option_add('*TCombobox*Listbox.font', ("Arial", 18))
+    clip_btn = tkinter.Button(read_data_gui, bg="#20bebe", fg="black", width=16, padx=1, pady=1, font=("Arial", 17), text="Copy to Clipboard", command=lambda: butn_decrypt("y"))
+    show_btn = tkinter.Button(read_data_gui, bg="#20bebe", fg="black", width=16, padx=1, pady=1, font=("Arial", 17), text="Show Everything", command=lambda: butn_decrypt("n"))
+    exit_btn = tkinter.Button(read_data_gui, bg="#20bebe", fg="black", width=14, padx=1, pady=1, font=("Arial", 17), text="Exit", command=lambda: exit_func())
+    combo_box = ttk.Combobox(read_data_gui, width=40, font=("Arial", 18), values=my_list)
+    read_data_gui.option_add('*TCombobox*Listbox.font', ("Arial", 18))
+    
+    text_box = tkinter.Text(read_data_gui, height=8, width=60, padx=8, pady=8, font=("Arial", 14))
+    
+    welcome_open_encrypter.grid(row=0, column=1)
+    passwords_radio.grid(row=1, column=0)
+    text_radio.grid(row=1, column=1)
     combo_box.grid(row=2, columnspan=3)
-    text_box = tkinter.Text(open_encrypter_gui, height=10, width=60, padx=10, pady=10, font=("Arial", 14))
     text_box.grid(row=3, columnspan=3)
+    exit_btn.grid(row=4, column=0, padx=3, pady=10)
+    show_btn.grid(row=4, column=1, padx=3, pady=10)
+    clip_btn.grid(row=4, column=2, padx=3, pady=10)
+
     private_key = path.join(directory, ".keys")
     private_key = private_key + "/private.key"
     def select_drop(num):
@@ -128,7 +134,8 @@ def Reader(password, mydirectory):
                 text_box.delete(1.0, "end")
             clear_text_box_thread = Thread(target=clear_text_box)
             clear_text_box_thread.start()
-            # open_encrypter_gui.destroy()
-            open_encrypter_gui.mainloop()
+            # read_data_gui.destroy()
+            
         except:
             pass
+    read_data_gui.mainloop()
