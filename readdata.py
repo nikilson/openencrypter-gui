@@ -62,7 +62,10 @@ def Reader(password, mydirectory):
     exit_btn.grid(row=4, column=0, padx=3, pady=10)
     show_btn.grid(row=4, column=1, padx=3, pady=10)
     clip_btn.grid(row=4, column=2, padx=3, pady=10)
-
+    
+    # Some keybindings
+    read_data_gui.bind("<Return>", lambda event: butn_decrypt("y"))
+    read_data_gui.bind("<Escape>", lambda event: exit_func())
     private_key = path.join(directory, ".keys")
     private_key = private_key + "/private.key"
     def select_drop(num):
@@ -138,4 +141,5 @@ def Reader(password, mydirectory):
             
         except:
             pass
+    read_data_gui.focus_force()
     read_data_gui.mainloop()

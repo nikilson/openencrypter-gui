@@ -40,6 +40,8 @@ def text_deleter(user, key, directory):
     exit_btn = tkinter.Button(open_encrypter_gui, bg="#20bebe", fg="black", width=20, padx=2, pady=2, font=("Arial", 18), text="Exit", command=lambda: exit_func())
     submit_pass_btn.grid(row=3, column=1)
     exit_btn.grid(row=3, column=0)
+    open_encrypter_gui.bind("<Return>", lambda event: delete_button())
+    open_encrypter_gui.bind("<Escape>", lambda event: exit_func())
     def select_drop(num):
         global select_pass_text, directory, message_list, my_values, combo_box, mydirectory, combo_box
         select_pass_text = num
@@ -80,6 +82,7 @@ def text_deleter(user, key, directory):
                 messagebox.showinfo("Return", message="Returning to main application")
         except:
             pass
+    open_encrypter_gui.focus_force()
     open_encrypter_gui.mainloop()
 
 if __name__ == '__main__':

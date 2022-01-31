@@ -54,6 +54,12 @@ def main_menu():
     home_b2.grid(row=2)
     home_b3.grid(row=3)
     home_b4.grid(row=4)
+
+    # Some keyboard bindings
+
+    open_encrypter_gui.bind("<Return>", lambda event: main_login1())
+    open_encrypter_gui.bind("<Escape>", lambda event: main_quit())
+    open_encrypter_gui.focus_force()
     open_encrypter_gui.mainloop()
     # Finish
 

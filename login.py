@@ -74,6 +74,11 @@ def main_login():
         quit_button.grid(row=3, column=0)
         go_back_button.grid(row=3, column=1)
         submit_button.grid(row=3, column=2)
+
+        # Some keyboard shortcuts
+        open_encrypter_gui.bind("<Return>", lambda event: submit())
+        open_encrypter_gui.bind("<Escape>", lambda event: go_back())
+        open_encrypter_gui.focus_force()
         open_encrypter_gui.mainloop()
         # print("exit << Go back to main")
         user_name_copy = user_name
@@ -142,6 +147,9 @@ def main_login():
         writedata_b.grid(row=2, column=0)
         deletedata_b.grid(row=3, column=0)
         Logout_b.grid(row=4, column=0)
+        open_encrypter_main_menu_gui.bind("<Return>", lambda event: readdata.Reader(user_key, directory))
+        open_encrypter_main_menu_gui.bind("<Escape>", lambda event: kill_login())
+        open_encrypter_main_menu_gui.focus_force()
         open_encrypter_main_menu_gui.mainloop()
         # select = str(input("Your option : "))
         # if select == '1':

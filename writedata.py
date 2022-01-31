@@ -111,6 +111,8 @@ def datawriter(user_name, user_key, directory):
     title_name_input.grid(row=1, column=1, columnspan=2)
     text_radio.grid(row=2, column=1)
     passwords_radio.grid(row=2, column=0)
+
+    # Some keyboard shortcuts
     # clean_shell()
     cwd = getcwd()
     cwd = path.join(cwd, ".users")
@@ -120,6 +122,7 @@ def datawriter(user_name, user_key, directory):
     text_store_path = path.join(cwd, ".text")
     #print(cwd, key_path, pass_store_path)
     check_password = False
+    open_encrypter_gui.focus_force()
     open_encrypter_gui.mainloop()
     # check_password = input(f"Do you want to save {title} as a password!! Default No (Y or n) : ")
     # if check_password.lower() == "y":

@@ -48,7 +48,7 @@ def login_live():
     encrypt_btn.grid(row=2, column=3)
     clear_btn.grid(row=3, column=3)
     logout_btn.grid(row=4, column=3)
-
+    open_encrypter_gui_login.focus_force()
     open_encrypter_gui_login.mainloop()
 
 def clear_text():
@@ -142,6 +142,9 @@ def live_main():
     user_key_input.grid(row=2, column=1, columnspan=2)
     login_key_btn.grid(row=3, column=2)
     exit_pass_btn.grid(row=3, column=0)
+    open_encrypter_gui.focus_force()
+    open_encrypter_gui.bind("<Return>", lambda event: login_btn_func())
+    open_encrypter_gui.bind("<Escape>", lambda event: go_back(open_encrypter_gui))
     open_encrypter_gui.mainloop()
     # print("press 1 >> GENERATE KEY\npress 2 >> LOGIN\npress 3 >> MAINMENU")
     # ask_mode = input("\nPlease enter your selection : ")
