@@ -6,6 +6,7 @@ from tkinter import messagebox
 from clearscreen import clean_shell, clear_clipboard
 from pyperclip import copy as clipcopier
 from threading import Thread
+import subprocess
 # path = "E:\\Productivity\\Documents\\sdrowssap\\Rinaldo"
 def Reader(password, mydirectory):
     # clean_shell()
@@ -127,8 +128,8 @@ def Reader(password, mydirectory):
                 if select_pass_text == 1:
                     decoded = password_obtained
                 clipcopier(decoded)
-                clipclear_thread = Thread(target=clear_clipboard)
-                clipclear_thread.start()
+                DETACHED_PROCESS = 0x00000008
+                subprocess.Popen(["CleanClipboard.exe", "arg"], close_fds=True, creationflags=DETACHED_PROCESS)
                 text_box.insert(tkinter.END, f"\nThe {state_text} is copied into the clipboard use it within 45 Seconds !!!\n")
             text_box.insert(tkinter.END, "\n\nThe screen will be cleared within 30 Seconds!!!\n")
             def clear_text_box():
